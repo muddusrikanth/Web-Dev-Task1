@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+#demo,#demo1,#demo3,#demo2
+{
+	background-color:red;
+	text-align: center;
+	color:white;
+	font-size:32px;
+	margin: 4px 4px;
+	width: 50px;
+	height: 50px;
+	border: 3px solid #73AD21;
+	padding: 25px 25px;
+	display:inline-block;
+}
+div
+{
+	text-align: center;
+	display:inline-block;
+	width:50px;
+	height:0px;
+	margin: 4px 4px;
+	padding: 0px 25px 0px 25px;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+</style>
+</head>
+<body>
+<h1>Here is the sample timer</h1>
+<button class="button" onclick="startCount()">Start Timer</button>
+<button class="button" onclick="stopCount()">Stop</button>
+<button class="button" onclick="reset()">Reset</button>
+
+<br>
+
+<div>Days</div>
+<div>Hours</div>
+<div>Minutes</div>
+<div>Seconds</div>
+<br>
+<div id="demo"></div>
+<div id="demo1"></div>
+<div id="demo2"></div>
+<div id="demo3"></div>
+
+
+<script>
+var time=prompt("Enter the deadline in this format May 29, 2016 11:15:00");
+if (time != null) {
+    var y= new Date(time);
+};
+
+var timer_is_on = 0;
+var b;
+
+
+function timer() {
+    var x =new Date();
+    var z = y-x;
+    var days=1000*60*60*24;
+    var hours=1000*60*60;
+    var minu=1000*60;
+    var sec=60;
+    var d=z/days;
+    var daysLeft=Math.floor(d);
+    var h=(d-daysLeft)*24;
+    var hoursLeft=Math.floor(h);
+    var m=(h-hoursLeft)*60;
+    var minuLeft=Math.floor(m);
+    var s=(m-minuLeft)*60;
+    var secLeft=Math.floor(s);
+    document.getElementById("demo").innerHTML=daysLeft;
+    document.getElementById("demo1").innerHTML=hoursLeft;
+    document.getElementById("demo2").innerHTML=minuLeft;
+    document.getElementById("demo3").innerHTML=secLeft;
+    b= setTimeout(function(){timer()},1000);
+};
+
+
+function startCount() {
+    if (!timer_is_on) {
+        timer_is_on = 1;
+        timer();
+    }
+}
+
+function stopCount() {
+    clearTimeout(b);
+    timer_is_on = 0;
+}
+
+function reset() {
+    stopCount();
+    time=prompt("Enter the deadline in this format May 29, 2016 11:15:00");
+          if (time != null) {
+          y= new Date(time);
+          };
+    startCount();
+}
+
+</script>
+</body>
+</html>
+
