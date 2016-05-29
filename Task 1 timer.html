@@ -65,10 +65,17 @@ h1,h3,p {
 
 
 <script>
+var x;
+var y;
+var z;
 function timer() {
-	var x =new Date();
-	var y =new Date("August 5, 2016 12:00:00");
-	var z = y-x;
+	x =new Date();
+	y =new Date("August 5, 2016 12:00:00");
+	z = y-x;
+	if (isNaN(z)) {
+	alert("Date is not valid,please re-enter")
+	}
+	else if (z>0) {
 	var days=1000*60*60*24;
 	var hours=1000*60*60;
 	var minu=1000*60;
@@ -86,6 +93,11 @@ function timer() {
 	document.getElementById("demo2").innerHTML=minuLeft;
 	document.getElementById("demo3").innerHTML=secLeft;
 	setTimeout(timer,1000);
+	}
+	else { 
+	alert("Deadline is over");
+	}
+
 }
 </script>
 
